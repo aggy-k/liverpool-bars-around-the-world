@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import 'actiontext.css';
+
+@layer base {
+
+}
+
+@layer components {
+  .btn {
+    @apply rounded-lg pt-[0.0625rem] pb-[0.5rem] pl-[1rem] pr-[1.5rem] relative;
+  }
+
+  .btn:after {
+    content: '';
+    @apply border-2 border-black rounded-lg absolute -top-1 -left-1 w-full h-full;
+  }
+
+  .btn-yellow {
+    @apply bg-brand-yellow;
+  }
+
+  .btn-yellow:hover {
+    @apply bg-brand-yellow/[0.8];
+  }
+
+  .btn-red {
+    @apply text-white bg-brand-red;
+  }
+
+  .btn-red:hover {
+    @apply bg-brand-red/[0.8];
+  }
+
+  .btn-blue {
+    @apply bg-brand-blue;
+  }
+
+  .btn-blue:hover {
+    @apply bg-brand-blue/[0.8];
+  }
+
+  .btn-invert {
+    @apply rounded-lg pt-[0.0625rem] pb-[0.5rem] pl-[1rem] pr-[1.5rem] relative;
+  }
+
+  .btn-invert:after {
+    content: '';
+    @apply border-2 rounded-lg absolute -top-1 -left-1 w-full h-full;
+  }
+
+  .btn-red-invert {
+/*    @apply text-white bg-brand-red/[0.5];*/
+    @apply text-brand-red bg-brand-red/[0.15];
+  }
+
+  .btn-red-invert:after {
+    @apply border-brand-red;
+  }
+
+  input[type='text']::placeholder {
+    @apply text-base font-light;
+  }
+
+  .off-border {
+    @apply bg-white rounded-lg;
+  }
+
+  .off-border:after {
+    content: '';
+    @apply border-2 border-black rounded-lg absolute -top-1 -left-1 w-full h-full;
+  }
+}

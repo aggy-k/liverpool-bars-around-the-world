@@ -1,0 +1,10 @@
+div class="fixed top-0 inset-x-0 px-16 py-6"
+  div class="w-full flex items-center justify-between"
+    div class="flex items-center"
+      div class="btn btn-red w-12 h-12 mr-4"
+        = image_tag 'dove-solid.svg', class: 'absolute top-1.5 left-1.5 object-contain w-8 h-8'
+      = link_to 'Explore!', '#', id: "navbar-explore", class: "text-brand-red font-cursiv font-bold"
+    div class="flex items-center gap-4"
+      / = content_tag :button, 'Login', class: 'btn-invert btn-red-invert'
+      = content_tag :button, 'Login', class: 'btn btn-blue'
+      = content_tag :button, 'Sign up', class: 'btn btn-red'

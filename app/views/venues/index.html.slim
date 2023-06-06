@@ -1,0 +1,11 @@
+p style="color: green" = notice
+
+h1 Venues
+
+#venues
+  - @venues.each do |venue|
+    == render venue
+    p
+      = link_to "Show this venue", venue
+
+= link_to "New venue", new_venue_path
