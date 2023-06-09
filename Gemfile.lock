@@ -271,6 +271,10 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.8.2)
+    view_component (3.1.0)
+      activesupport (>= 5.2.0, < 8.0)
+      concurrent-ruby (~> 1.0)
+      method_source (~> 1.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.0)
@@ -315,6 +319,7 @@ DEPENDENCIES
   table_print
   turbo-rails
   tzinfo-data
+  view_component
   web-console
 
 RUBY VERSION

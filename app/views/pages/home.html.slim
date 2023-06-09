@@ -1,9 +1,17 @@
-/ section class="w-full h-screen bg-cover bg-center bg-no-repeat" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(#{asset_path('wp01.jpg')});"
-section class="w-full h-screen bg-cover bg-center bg-no-repeat flex items-center justify-center" style="background-image: linear-gradient(rgba(255,255,255,1.0),rgba(0,0,0,0.4)), url(#{asset_path('wp01.jpg')});"
-  div class="flex flex-col justify-center items-center"
-    h1.text-3xl.text-white.font-cursiv.font-bold Watch Liverpool FC live around the world
-    p.text-xl.text-white.mb-8 A collection, by the fans, for the fans
-    div class="flex items-center gap-3"
-      div class="relative off-border w-[28rem] h-[2rem] py-1.5 px-3"
-        = text_field_tag 'search', nil, class: "px-2.5 bg-transparent w-full h-full rounded-lg absolute -left-1 -top-1", placeholder: "Search for pubs/restaurants/etc by city..."
-      = content_tag :button, 'Search', class: 'btn h-fit btn-red'
+div id="home" data-controller="pages" data-pages-go-to-explore-value="#{@is_explore}"
+  section class="w-full h-screen bg-cover bg-center bg-no-repeat flex items-center justify-center" style="background-image: linear-gradient(rgba(255,255,255,1.0),rgba(0,0,0,0.4)), url(#{asset_path('wp01.jpg')});"
+    div class="flex flex-col justify-center items-center"
+      h1.text-3xl.text-white.font-cursiv.font-bold Watch Liverpool FC live around the world
+      p.text-xl.text-white.mb-8 A collection, by the fans, for the fans
+      = render Shared::SearchbarComponent.new(location: 'banner')
+
+  section style="height: calc(100vh - 2rem);" class="w-full mt-8 pt-24 px-16 overflow-hidden sticky top-0" id="explore-venues" data-pages-target="explore"
+    div class="flex gap-4 h-full overflow-hidden"
+      div class="grid grid-cols-1 gap-4 overflow-y-scroll flex-grow pt-2 pb-8 pl-2 pr-4"
+        - 10.times do
+          = render Shared::CardComponent.new(venue: Venue.first)
+
+
+      div class="w-2/3 pt-2 pb-8 overflow-hidden"
+        = render 'shared/map'
+

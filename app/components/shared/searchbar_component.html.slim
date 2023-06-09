@@ -1,0 +1,6 @@
+= form_with url: root_path, method: :get, data: { turbo: false } do |f|
+  = f.hidden_field :explore, value: true
+  div class="flex items-center gap-3 text-sm"
+    div class="relative off-border #{width} h-[2rem] py-1.5 px-3"
+      = f.text_field 'search', class: "px-4 bg-transparent w-full h-full rounded-lg absolute -left-1 -top-1", placeholder: "Search for pubs/restaurants/etc by city..."
+    = f.button 'Search', class: 'btn h-fit btn-red'

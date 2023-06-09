@@ -5,4 +5,8 @@ class Venue < ApplicationRecord
 
   has_rich_text :about
   has_many_attached :images, dependent: :detach
+
+  def cover_image
+    images.attached? ? images.first.url : nil
+  end
 end

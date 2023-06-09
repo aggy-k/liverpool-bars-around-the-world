@@ -40,6 +40,8 @@ gem "active_record_extended"
 gem "acts-as-taggable-on", "~> 9.0"
 # gem "acts_as_list"
 
+gem "view_component"
+
 gem "blazer"
 gem "ahoy_matey"
 gem "table_print"

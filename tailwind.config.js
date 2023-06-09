@@ -5,9 +5,11 @@ const plugin = require('tailwindcss/plugin')
 module.exports = {
   content: [
     './app/views/**/*.{erb,haml,html,slim}',
+    './app/components/**/*',
     './app/helpers/**/*.rb',
     './app/assets/stylesheets/**/*.css',
-    './app/javascript/**/*.js'
+    './app/javascript/**/*.js',
+    './node_modules/flowbite/**/*.js'
   ],
   theme: {
     extend: {
@@ -178,9 +180,10 @@ module.exports = {
       borderWidth: ['last', 'first'],
     }
   },
-  // plugins: [
-  //   require('@tailwindcss/forms'),
-  //   require('@tailwindcss/aspect-ratio'),
-  //   require('@tailwindcss/typography'),
-  // ]
+  plugins: [
+    require('flowbite/plugin'),
+    // require('@tailwindcss/forms'),
+    // require('@tailwindcss/aspect-ratio'),
+    // require('@tailwindcss/typography'),
+  ]
 }

@@ -60,7 +60,7 @@
   }
 
   input[type='text']::placeholder {
-    @apply text-base font-light;
+    @apply text-sm font-light;
   }
 
   .off-border {
@@ -71,4 +71,50 @@
     content: '';
     @apply border-2 border-black rounded-lg absolute -top-1 -left-1 w-full h-full;
   }
+
+  .brand-card {
+    @apply bg-gray-200 rounded-lg pt-[0.5rem] pb-[1rem] pl-[0.5rem] pr-[1rem] relative;
+  }
+
+  .brand-card:after {
+    content: '';
+    @apply border-2 border-black rounded-lg absolute -top-1 -left-1 w-full h-full;
+  }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

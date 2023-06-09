@@ -1,0 +1,11 @@
+= link_to '#', class: "brand-card w-full h-36 flex gap-2"
+  div class="w-2/5 rounded-lg bg-cover bg-center bg-no-repeat" style="background-image: url(#{@venue.cover_image})"
+  div class="flex flex-col relative"
+    div class="w-2/3"
+      h2.text-lg.font-semibold = @venue.name
+      p.mt-3.text-sm.line-clamp-2 = "#{@venue.address}, #{@venue.city.name}, #{@venue.city.country}"
+    div class="absolute bottom-[2.25rem] right-[0.825rem]"
+      = image_tag 'sign_hanger.svg'
+    div class="absolute bottom-2 right-0 btn bg-green-400 text-xs text-center text-white w-[4.75rem]" Open
+    / div class="absolute bottom-2 right-0 btn bg-red-400 text-xs text-center text-white w-[4.75rem]" Closed
+
