@@ -3,11 +3,12 @@ class CreateVenues < ActiveRecord::Migration[7.0]
     create_table :venues do |t|
       t.string :name
       t.text :address
-      t.string :latitude
-      t.string :float
+      t.float :latitude
       t.float :longitude
       t.references :city, null: false, foreign_key: true
       t.string :phone_number
+      t.string :email
+      t.string :website
       t.string :facebook
       t.string :instagram
       t.string :twitter

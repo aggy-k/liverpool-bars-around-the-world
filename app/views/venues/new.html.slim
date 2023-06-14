@@ -1,8 +1,5 @@
-h1 New venue
+div class="pt-32 pb-8 px-32"
 
-== render "form", venue: @venue
+  h1.text-xl.font-cursiv.font-bold Add New venue
 
-br
-
-div
-  = link_to "Back to venues", venues_path
+  == render "form", venue: @venue

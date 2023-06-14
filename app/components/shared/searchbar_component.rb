@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Shared::SearchbarComponent < ViewComponent::Base
+class Shared::SearchbarComponent < ApplicationComponent
   def initialize(location:)
     @location = location
   end

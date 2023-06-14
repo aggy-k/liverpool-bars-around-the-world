@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :venues
   devise_for :users
   mount RailsAdmin::Engine => '/rails_admin', as: 'rails_admin'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -7,4 +6,6 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "pages#home"
   get 'testing', to: 'pages#testing'
+
+  resources :venues, param: :slug, only: [ :show, :new, :create, :edit, :update, :destroy ]
 end

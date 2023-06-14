@@ -11,7 +11,7 @@ export default class extends Controller {
   connect() {
     console.log('apikey', this.apiKeyValue)
     console.log('markers', this.markersValue)
-    console.log('el', this.element)
+    // console.log('el', this.element)
     mapboxgl.accessToken = this.apiKeyValue
 
     this.map = new mapboxgl.Map({
@@ -19,14 +19,19 @@ export default class extends Controller {
       style: "mapbox://styles/mapbox/streets-v10"
     })
 
-    if (this.map) this.addMarkersToMap()
+    this.addMarkersToMap()
     this.fitMapToMarkers()
   }
 
   addMarkersToMap() {
     this.markersValue.forEach((marker) => {
-      new mapboxgl.Marker()
+      const popup = new mapboxgl.Popup().setHTML(marker.info_window_html)
+      const customMarker = document.createElement("div")
+      customMarker.innerHTML = marker.marker_html
+
+      new mapboxgl.Marker(customMarker)
         .setLngLat([ marker.lng, marker.lat ])
+        .setPopup(popup)
         .addTo(this.map)
     })
   }

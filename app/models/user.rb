@@ -5,4 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :venues, foreign_key: :uploader_id
+  has_one_attached :avatar
 end

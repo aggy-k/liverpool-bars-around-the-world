@@ -8,6 +8,15 @@ class VenuesController < ApplicationController
 
   # GET /venues/1
   def show
+    @opening_hours = [
+      [ 'Mon', [ {opens_at: '07:00', closes_at: '23:00' }] ],
+      [ 'Tue', [ {opens_at: '07:00', closes_at: '23:00' }] ],
+      [ 'Wed', [ {opens_at: '07:00', closes_at: '23:00' }] ],
+      [ 'Thu', [ {opens_at: '07:00', closes_at: '23:00' }] ],
+      [ 'Fri', [ {opens_at: '07:00', closes_at: '23:00' }] ],
+      [ 'Sat', [ {opens_at: '02:00', closes_at: '05:00' }, {opens_at: '07:00', closes_at: '23:00' }] ],
+      [ 'Sun', [ {opens_at: '07:00', closes_at: '23:00' }] ],
+    ]
   end
 
   # GET /venues/new
@@ -48,7 +57,8 @@ class VenuesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_venue
-      @venue = Venue.find(params[:id])
+      # @venue = Venue.find(params[:id])
+      @venue = Venue.find_by(slug: params[:slug])
     end
 
     # Only allow a list of trusted parameters through.

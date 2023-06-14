@@ -39,6 +39,8 @@ gem "pretender" # to simulate login as another account
 gem "active_record_extended"
 gem "acts-as-taggable-on", "~> 9.0"
 # gem "acts_as_list"
+gem "font-awesome-sass", "~> 6.1"
+
 
 gem "view_component"
 
@@ -63,6 +65,7 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+  gem "faker"
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"

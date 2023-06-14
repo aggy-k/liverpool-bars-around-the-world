@@ -76,11 +76,45 @@
     @apply bg-gray-200 rounded-lg pt-[0.5rem] pb-[1rem] pl-[0.5rem] pr-[1rem] relative;
   }
 
+  .brand-card:hover {
+    @apply bg-gray-300;
+  }
+
   .brand-card:after {
     content: '';
     @apply border-2 border-black rounded-lg absolute -top-1 -left-1 w-full h-full;
   }
 
+  .mapboxgl-popup-content {
+    @apply !bg-transparent !shadow-none !w-fit;
+  }
+
+  .mapboxgl-popup-close-button {
+/*    @apply !bg-white !rounded-full !p-1 w-6 h-6 !text-sm !leading-none;*/
+    @apply !top-2 !right-6;
+  }
+
+  .mapboxgl-ctrl-geocoder.mapboxgl-ctrl {
+    max-width: unset;
+    @apply w-full rounded-lg shadow-none;
+  }
+
+  .mapboxgl-ctrl-geocoder.mapboxgl-ctrl > input {
+    @apply w-full rounded-lg border-0 shadow;
+  }
+
+  .mapboxgl-ctrl-geocoder.mapboxgl-ctrl > div[data-lastpass-icon-root='true'] {
+    @apply hidden;
+  }
+
+  .form-group {
+    @apply w-full;
+  }
+
+  .form-group > input, select, textarea {
+/*    @apply border-x-0 border-t-0 border-b-2 !border-black appearance-none;*/
+    @apply w-full rounded-lg border-0 shadow;
+  }
 }
 
 
