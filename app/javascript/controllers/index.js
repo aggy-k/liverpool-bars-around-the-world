@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import ChoicesJsController from "./choices_js_controller"
+application.register("choices-js", ChoicesJsController)
+
 import FormMapController from "./form_map_controller"
 application.register("form-map", FormMapController)
 
@@ -21,3 +24,6 @@ application.register("navbar", NavbarController)
 
 import PagesController from "./pages_controller"
 application.register("pages", PagesController)
+
+import TomSelectController from "./tom_select_controller"
+application.register("tom-select", TomSelectController)

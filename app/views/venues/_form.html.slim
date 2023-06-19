@@ -1,8 +1,9 @@
 = form_with(model: @venue) do |form|
 
-  div class="mt-4 flex gap-8"
+  div class="mt-4 flex gap-8" id="form-main-container" data-controller="form-map" data-form-map-api-key-value="#{Rails.application.credentials.dig(:mapbox, :token)}"
     div class="w-1/2 grid grid-cols-1 gap-3"
       = render 'form_map', venue: @venue
+
     div class="w-1/2 grid grid-cols-1 gap-3"
       / div.form-group
         = form.label :images, style: "display: block"
@@ -12,13 +13,16 @@
         = form.label :name, style: "display: block"
         = form.text_field :name
 
-      div.form-group id="venue_address_wrapper"
+      div.form-group data-form-map-target="addressFieldWrapper"
         = form.label :address, style: "display: block"
-        = form.text_field :address, class: 'hidden'
+        = form.text_area :address, data: { form_map_target: 'addressField' }
+        = form.hidden_field :latitude, data: { form_map_target: 'latField' }
+        = form.hidden_field :longitude, data: { form_map_target: 'lngField' }
 
-      / div.form-group
-      /   = form.label :city_id, style: "display: block"
-      /   = form.text_field :city_id
+      div.form-group
+        = form.label :city, style: "display: block"
+        / = form.select :city_id, options_for_select(City.order(:name_ascii).map{|c| ["#{c.name_ascii}, #{c.country}", c.id]}), { prompt: true }, { multiple: false, data: { controller: 'tom-select' }}
+        = form.select :city_id, options_for_select(City.order(:name_ascii).limit(10).map{|c| ["#{c.name_ascii}, #{c.country}", c.id]}), { prompt: true }, { multiple: false, data: { controller: 'choices-js', action: 'search->choices-js#keyup' }}
 
       div.form-group
         = form.label :phone_number, style: "display: block"

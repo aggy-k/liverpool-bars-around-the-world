@@ -111,9 +111,33 @@
     @apply w-full;
   }
 
-  .form-group > input, select, textarea {
+  .choices-single-inner, .form-group > input, select, textarea {
 /*    @apply border-x-0 border-t-0 border-b-2 !border-black appearance-none;*/
     @apply w-full rounded-lg border-0 shadow;
+  }
+
+  .ts-control {
+    @apply !rounded-lg !border-0 !shadow !text-sm leading-loose;
+  }
+
+  .ts-control > input {
+/*    @apply !leading-loose !py-1;*/
+  }
+
+  .ts-control > input::placeholder {
+    @apply text-sm font-light;
+  }
+
+  .choices-single-inner > input::placeholder {
+    @apply text-sm font-light;
+  }
+
+  .choices-single-inner {
+    @apply bg-white text-sm px-3 py-2 align-middle;
+  }
+
+  .choices {
+    @apply !overflow-visible;
   }
 }
 

@@ -8,7 +8,7 @@ class Venue < ApplicationRecord
   has_rich_text :about
   has_many_attached :images, dependent: :detach
 
-  validates :name, presence: true
+  validates :name, :address, :longitude, :latitude, presence: true
   before_save :attach_slug
 
   def attach_slug
