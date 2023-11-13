@@ -49,6 +49,7 @@ gem "ahoy_matey"
 gem "table_print"
 gem 'smarter_csv'
 gem 'activerecord-import'
+gem 'timezone', '~> 1.0'
 
 gem "rails_admin"
 
