@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_10_050644) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_12_042435) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -158,6 +158,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_10_050644) do
     t.string "country"
     t.string "country_iso2"
     t.string "country_iso3"
+    t.string "timezone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -173,6 +174,25 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_10_050644) do
     t.index ["parent_id"], name: "index_comments_on_parent_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
     t.index ["venue_id"], name: "index_comments_on_venue_id"
+  end
+
+  create_table "external_links", force: :cascade do |t|
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.string "url"
+    t.integer "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["record_type", "record_id"], name: "index_external_links_on_record"
+  end
+
+  create_table "opening_hours", force: :cascade do |t|
+    t.bigint "venue_id", null: false
+    t.integer "wday"
+    t.jsonb "hours", default: []
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["venue_id"], name: "index_opening_hours_on_venue_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -201,23 +221,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_10_050644) do
 
   create_table "venues", force: :cascade do |t|
     t.string "name"
+    t.string "slug"
     t.text "address"
     t.float "latitude"
     t.float "longitude"
     t.bigint "city_id", null: false
     t.string "phone_number"
     t.string "email"
-    t.string "website"
-    t.string "facebook"
-    t.string "instagram"
-    t.string "twitter"
-    t.string "tiktok"
     t.bigint "uploader_id"
-    t.boolean "is_verified", default: false
+    t.boolean "is_claimed", default: false
     t.bigint "venue_admin_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "slug"
     t.index ["city_id"], name: "index_venues_on_city_id"
     t.index ["uploader_id"], name: "index_venues_on_uploader_id"
     t.index ["venue_admin_id"], name: "index_venues_on_venue_admin_id"
@@ -228,6 +243,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_10_050644) do
   add_foreign_key "comments", "comments", column: "parent_id"
   add_foreign_key "comments", "users"
   add_foreign_key "comments", "venues"
+  add_foreign_key "opening_hours", "venues"
   add_foreign_key "venues", "cities"
   add_foreign_key "venues", "users", column: "uploader_id"
   add_foreign_key "venues", "users", column: "venue_admin_id"

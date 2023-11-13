@@ -47,22 +47,11 @@ require 'open-uri'
 # end
 
 
-# 5.times do
-#   u = User.create!(email: Faker::Internet.email, username: Faker::Internet.username, password: '12345678')
-#   Comment.create!(body: Faker::Lorem.sentences(number: 2), user: u, venue: Venue.first)
-# end
-
-# User.find_each do |user|
-#   user.avatar.attach(io: URI.open(Faker::Avatar.image), filename: Devise.friendly_token(8))
-# end
-
-
-
-
-
-
-
-
+5.times do
+  u = User.create!(email: Faker::Internet.email, username: Faker::Internet.username, password: '12345678')
+  u.avatar.attach(io: URI.open(Faker::Avatar.image), filename: Devise.friendly_token(8))
+  Comment.create!(body: Faker::Lorem.sentences(number: 2), user: u, venue: Venue.first)
+end
 
 
 

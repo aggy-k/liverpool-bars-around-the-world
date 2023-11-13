@@ -8,6 +8,7 @@ class CreateCities < ActiveRecord::Migration[7.0]
       t.string :country
       t.string :country_iso2
       t.string :country_iso3
+      t.string :timezone
 
       t.timestamps
     end
