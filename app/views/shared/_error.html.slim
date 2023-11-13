@@ -1,0 +1,6 @@
+- if object.errors.present?
+  p class="w-fit ml-auto text-xs italic text-brand-red"
+    - if object.errors.messages[field].present?
+      = "#{field.to_s.capitalize} #{object.errors.messages[field].join(', ')}"
+    - else
+      | Oops, there's an error

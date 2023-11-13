@@ -9,6 +9,7 @@ gem "pg", "~> 1.1"
 gem "puma", "~> 5.0"
 gem "jsbundling-rails"
 gem "turbo-rails"
+gem "turbo_boost-elements" #, "~> VERSION"
 gem "stimulus-rails"
 gem "cssbundling-rails"
 gem "redis", "~> 4.0"
@@ -35,6 +36,7 @@ gem "slim-rails"
 gem "kaminari" # for pagination
 # gem "gretel" # for breadcrumbs
 gem "pretender" # to simulate login as another account
+gem 'counter_culture', '~> 3.2'
 # gem "pg_search"
 gem "active_record_extended"
 gem "acts-as-taggable-on", "~> 9.0"

@@ -1,0 +1,31 @@
+/ div class="flex flex-col py-3 border-b border-black border-dashed"
+= tag.div id: dom_id(comment), class: "flex flex-col py-3 border-b border-black border-dashed" do
+  div.flex.items-center
+    p.text-sm.font-semibold.text-gray-500 = "#{comment.user.username}"
+    p.text-xs.text-gray-400.italic.ml-4 = comment.created_at.strftime('%b %d, %Y, %l:%M %p')
+  div.mt-2
+    p = comment.body
+  div.mt-2.flex.items-center.justify-between
+    div.flex.items-center.gap-3
+      i class="fa-solid fa-caret-up text-lg mt-0.5 text-green-500"
+      p.text-xs.text-green-500 = comment.votes
+      i class="fa-solid fa-caret-down text-lg mb-0.5 text-brand-red"
+    = link_to replies_comment_path(comment), data: { turbo_frame: dom_id(comment, :replies) } do
+      div.flex.items-center.gap-3
+        i class="fa-regular fa-message"
+        p.text-xs = comment.replies_count
+    / = toggle_trigger_tag renders: current_partial_path, morphs: dom_id(comment), controls: dom_id(comment, :replies), locals: local_assigns, assigns: { comment: comment } do
+      - if toggle_target_collapsed?(dom_id(comment, :replies))
+        = link_to request.path do
+          div.flex.items-center.gap-3
+            i class="fa-regular fa-message"
+            p.text-xs = comment.replies_count
+      - else
+        = link_to request.path, class: "text-brand-red" do
+          div.flex.items-center.gap-3
+            i class="fa-regular fa-message"
+            p.text-xs = comment.replies_count
+
+  / = toggle_target_tag dom_id(comment, :replies) do
+    = render 'comments/replies', comment: comment
+  = turbo_frame_tag dom_id(comment, :replies)

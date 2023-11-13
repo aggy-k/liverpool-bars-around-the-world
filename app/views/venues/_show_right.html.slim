@@ -1,31 +1,18 @@
 // RIGHT SIDE
 div class="w-full lg:w-2/5 h-fit"
   div id="leave-comment" class="mt-4"
-    = form_with url: '#' do |f|
-      div.flex.flex-col
-        = f.label :comment, 'Leave comment'
-        = f.text_area :comment, class: "rounded-lg border border-dashed min-h-24"
-      div.mt-4.w-fit.ml-auto
-        = f.button 'Send', class: "btn btn-blue"
+    = turbo_frame_tag :new_venue_comment, src: new_venue_comment_path(venue)
 
-  div id="about" class="mt-6 w-full"
+  div class="mt-6 w-full"
+    h3.text-xl.font-cursiv.font-bold.border-b-2.border-dashed.border-black.pb-2 LATEST COMMENTS
+
+    div class="mt-4 flex flex-col gap-4"
+      = turbo_frame_tag :comments do
+        = render venue.comments.latest.limit(3)
+
+  div class="mt-6 w-full"
     h3.text-xl.font-cursiv.font-bold.border-b-2.border-dashed.border-black.pb-2 TOP COMMENTS
 
     div class="mt-4 flex flex-col gap-4"
-      - venue.comments.where(parent: nil).each do |comment|
-        div class="flex flex-col py-3 border-b border-black border-dashed"
-          div.flex.items-center
-            p.text-sm.font-semibold.text-gray-500 = "#{comment.user.username}"
-            p.text-xs.text-gray-400.italic.ml-4 = comment.created_at.strftime('%B %d, %Y')
-          div.mt-2
-            p = comment.body
-          div.mt-2.flex.items-center.justify-between
-            div.flex.items-center.gap-3
-              i class="fa-solid fa-caret-up text-lg mt-0.5 text-green-500"
-              p.text-xs.text-green-500 190
-              / p.text-xs.text-green-500.bg-gray-200.py-1.px-3.rounded 190
-              i class="fa-solid fa-caret-down text-lg mb-0.5 text-brand-red"
-            div.flex.items-center.gap-3
-              / i class="fa-solid fa-reply"
-              i class="fa-regular fa-message"
-              p.text-xs 32
+      = turbo_frame_tag :comments do
+        = render venue.comments.top.limit(3)

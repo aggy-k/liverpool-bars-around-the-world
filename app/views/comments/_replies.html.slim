@@ -1,0 +1,10 @@
+/ = tag.div id: dom_id(comment, :replies)
+- if comment.replies.present?
+  div class="my-4 ml-2 pl-3 border-l border-gray-300"
+    - comment.replies.order(created_at: :desc).each do |comment|
+      div class="flex flex-col py-3"
+        div.flex.items-center
+          p.text-sm.font-semibold.text-gray-500 = "#{comment.user.username}"
+          p.text-xs.text-gray-400.italic.ml-4 = comment.created_at.strftime('%b %d, %Y, %l:%M %p')
+        div.mt-2
+          p = comment.body

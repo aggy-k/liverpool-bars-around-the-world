@@ -7,5 +7,11 @@ Rails.application.routes.draw do
   root "venues#index"
   get 'testing', to: 'pages#testing'
 
-  resources :venues, param: :slug, only: [ :show, :new, :create, :edit, :update, :destroy ]
+  resources :venues, param: :slug, only: [ :show, :new, :create, :edit, :update, :destroy ] do
+    resources :comments, only: [:create, :new]
+  end
+
+  resources :comments, only: [] do
+    get :replies, on: :member
+  end
 end

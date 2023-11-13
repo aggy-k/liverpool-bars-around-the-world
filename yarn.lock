@@ -363,6 +363,24 @@
   dependencies:
     defer-to-connect "^2.0.0"
 
+"@turbo-boost/commands@>= 0.0.14":
+  version "0.0.14"
+  resolved "https://registry.yarnpkg.com/@turbo-boost/commands/-/commands-0.0.14.tgz#9f9160326e92484d35018da2a7bafc6885443b82"
+  integrity sha512-OYe1hnFffHFDG6YTz964YZaSXCSaWMygD8Nuj7AaKZzoedMKWw6KlAwF1liYtLwIi1DB3/RapI0mzVIu2AywZQ==
+
+"@turbo-boost/devtools@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@turbo-boost/devtools/-/devtools-0.0.4.tgz#5fc2b09dbbacb0c6d6608fd068100fc0fb47e7f8"
+  integrity sha512-92SuX7BVWrwFVU1UVyqYS0rhc4V6xKpGhD9OfCNGa2M+bpihRobl9XLl3dHYjOfsLbDKYB2jll64XkLgMF08Mw==
+
+"@turbo-boost/elements@^0.0.17":
+  version "0.0.17"
+  resolved "https://registry.yarnpkg.com/@turbo-boost/elements/-/elements-0.0.17.tgz#087b2c1643bc85d988ec67bb6fefbdb7653c2720"
+  integrity sha512-lvPPO7attsHR3FcNrG9jWCtCzVKPiqgZ2/V3JJHKap8TiG74HiILAyiNSQRhhLSIHO+OrA4HFYovLz/pziXHQA==
+  dependencies:
+    "@turbo-boost/commands" ">= 0.0.14"
+    "@turbo-boost/devtools" "^0.0.4"
+
 "@types/cacheable-request@^6.0.1":
   version "6.0.3"
   resolved "https://registry.yarnpkg.com/@types/cacheable-request/-/cacheable-request-6.0.3.tgz#a430b3260466ca7b5ca5bfd735693b36e7a9d183"
