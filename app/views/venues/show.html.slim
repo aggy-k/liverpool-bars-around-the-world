@@ -1,97 +1,28 @@
 div class="min-h-screen pt-32 pb-16 px-4 md:px-16 lg:px-32"
-  div class="lg:flex lg:items-center lg:gap-4"
+  // desktop images
+  div class="hidden lg:flex lg:items-center lg:gap-4"
     div class="w-3/5"
       div class="w-full h-72 rounded-lg bg-gray-300"
     div class="w-2/5 grid grid-cols-2 gap-4"
       - 4.times do
         div class="w-full h-[8.5rem] bg-gray-300 rounded-lg"
+  // mobile images -> carousel
+  div class="lg:hidden"
+    div class="w-full relative"
+      div class="w-full h-72 rounded-lg bg-gray-300"
+      div class="absolute bottom-2 right-2"
+        = render 'added_by', venue: @venue
 
-  div class="mt-6 flex gap-12 px-4"
-    div class="w-3/5 h-fit"
+  div class="p-4 w-full flex flex-col-reverse lg:flex-row lg:justify-between lg:items-center"
+    div
       h1.font-cursiv.font-bold.text-3xl = @venue.name
-      p.mt-4 = @venue.address
-      p = "#{@venue.city.name}, #{@venue.city.country}"
-      p = @venue.phone_number
+      p.text-xs.italic.text-gray-400 = "#{@venue.city.name}, #{@venue.city.country}"
+    div class="hidden lg:inline"
+      = render 'added_by', venue: @venue
 
-      div id="map" class="mt-4 w-full h-64 rounded-lg bg-gray-200"
-
-      div id="about" class="mt-6 w-full"
-        h3.text-xl.font-cursiv.font-bold.border-b-2.border-dashed.border-black.pb-2 About the Venue
-
-        p.mt-4.px-2
-          | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-      div id="hours" class="mt-6 w-full"
-        h3.text-xl.font-cursiv.font-bold.border-b-2.border-dashed.border-black.pb-2 Opening Hours
-
-        div.mt-4.px-2
-          - @opening_hours.each do |oh|
-            div.flex.gap-4
-              p.w-20 = oh.first
-              p = oh.second.map {|x| "#{x[:opens_at]} - #{x[:closes_at]}"}.join(", ")
-
-
-      div id="contact" class="mt-6 w-full"
-        h3.text-xl.font-cursiv.font-bold.border-b-2.border-dashed.border-black.pb-2 Contact the Venue
-
-        div class="mt-4 grid grid-cols-1 gap-2"
-        - if @venue.website.present?
-          div.flex.items-center.gap-3.px-2
-            i class="fa-solid fa-globe"
-            p = @venue.website
-        - if @venue.email.present?
-          div.flex.items-center.gap-3.px-2
-            i class="fa-solid fa-envelope"
-            p = @venue.email
-        - if @venue.facebook.present?
-          div.flex.items-center.gap-3.px-2
-            i class="fa-brands fa-facebook"
-            p = @venue.facebook
-        - if @venue.instagram.present?
-          div.flex.items-center.gap-3.px-2
-            i class="fa-brands fa-instagram"
-            p = @venue.instagram
-        - if @venue.twitter.present?
-          div.flex.items-center.gap-3.px-2
-            i class="fa-brands fa-twitter"
-            p = @venue.twitter
-        - if @venue.tiktok.present?
-          div.flex.items-center.gap-3.px-2
-            i class="fa-brands fa-tiktok"
-            p = @venue.tiktok
-
-    // RIGHT SIDE
-    div class="w-2/5 h-fit"
-      div id="leave-comment" class="mt-4"
-        = form_with url: '#' do |f|
-          div.flex.flex-col
-            = f.label :comment, 'Leave comment'
-            = f.text_area :comment, class: "rounded-lg border border-dashed min-h-24"
-          div.mt-4.w-fit.ml-auto
-            = f.button 'Send', class: "btn btn-blue"
-
-      div id="about" class="mt-6 w-full"
-        h3.text-xl.font-cursiv.font-bold.border-b-2.border-dashed.border-black.pb-2 TOP COMMENTS
-
-        div class="mt-4 flex flex-col gap-4"
-          - @venue.comments.where(parent: nil).each do |comment|
-            div class="flex flex-col py-3 border-b border-black border-dashed"
-              div.flex.items-center
-                p.text-sm.font-semibold.text-gray-500 = "#{comment.user.username}"
-                p.text-xs.text-gray-400.italic.ml-4 = comment.created_at.strftime('%B %d, %Y')
-              div.mt-2
-                p = comment.body
-              div.mt-2.flex.items-center.justify-between
-                div.flex.items-center.gap-3
-                  i class="fa-solid fa-caret-up text-lg mt-0.5 text-green-500"
-                  p.text-xs.text-green-500 190
-                  / p.text-xs.text-green-500.bg-gray-200.py-1.px-3.rounded 190
-                  i class="fa-solid fa-caret-down text-lg mb-0.5 text-brand-red"
-                div.flex.items-center.gap-3
-                  / i class="fa-solid fa-reply"
-                  i class="fa-regular fa-message"
-                  p.text-xs 32
-
+  div class="mt-4 flex flex-col lg:flex-row gap-12 px-4"
+    = render 'show_left', venue: @venue
+    = render 'show_right', venue: @venue
 
 
 

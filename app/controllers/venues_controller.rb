@@ -1,21 +1,38 @@
 class VenuesController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index, :show]
   before_action :set_venue, only: %i[ show edit update destroy ]
 
-  # GET /venues
   def index
+    @is_explore = params[:explore].present?
+    # @markers = City.where(name: %w[Jakarta Surabaya Singapore Kuala\ Lumpur]).map {|x| {lat: x.latitude, lng: x.longitude}}
     @venues = Venue.all
+    @markers = Venue.all.map {|x| {
+      lat: x.latitude,
+      lng: x.longitude,
+      info_window_html: Shared::CardComponent.new(venue: x).to_html,
+      marker_html: render_to_string(partial: "shared/marker", locals: {venue: x})}
+    }
+    if @is_explore
+      # data-turbo="false" on the form to make the anchor works
+      redirect_to root_path(anchor: 'explore-venues')
+    end
   end
 
-  # GET /venues/1
   def show
+    @markers = [{
+      lat: @venue.latitude,
+      lng: @venue.longitude,
+      info_window_html: Shared::CardComponent.new(venue: @venue).to_html,
+      marker_html: render_to_string(partial: "shared/marker", locals: {venue: @venue})
+    }]
     @opening_hours = [
-      [ 'Mon', [ {opens_at: '07:00', closes_at: '23:00' }] ],
-      [ 'Tue', [ {opens_at: '07:00', closes_at: '23:00' }] ],
-      [ 'Wed', [ {opens_at: '07:00', closes_at: '23:00' }] ],
-      [ 'Thu', [ {opens_at: '07:00', closes_at: '23:00' }] ],
-      [ 'Fri', [ {opens_at: '07:00', closes_at: '23:00' }] ],
-      [ 'Sat', [ {opens_at: '02:00', closes_at: '05:00' }, {opens_at: '07:00', closes_at: '23:00' }] ],
-      [ 'Sun', [ {opens_at: '07:00', closes_at: '23:00' }] ],
+      [ 'Mon', [ {"open" => '07:00', "close" => '23:00' }] ],
+      [ 'Tue', [ {"open" => '07:00', "close" => '23:00' }] ],
+      [ 'Wed', [ {"open" => '07:00', "close" => '23:00' }] ],
+      [ 'Thu', [ {"open" => '07:00', "close" => '23:00' }] ],
+      [ 'Fri', [ {"open" => '07:00', "close" => '23:00' }] ],
+      [ 'Sat', [ {"open" => '02:00', "close" => '05:00' }, {"open" => '07:00', "close" => '23:00' }] ],
+      [ 'Sun', [ {"open" => '07:00', "close" => '23:00' }] ],
     ]
   end
 
@@ -52,7 +69,7 @@ class VenuesController < ApplicationController
   # DELETE /venues/1
   def destroy
     @venue.destroy
-    redirect_to venues_url, notice: "Venue was successfully destroyed.", status: :see_other
+    redirect_to venues_url, notice: "Venue was successfully deleted.", status: :see_other
   end
 
   private
@@ -64,6 +81,6 @@ class VenuesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def venue_params
-      params.require(:venue).permit(:name, :address, :latitude, :float, :longitude, :city_id, :phone_number, :facebook, :instagram, :twitter, :tiktok, :uploader_id, :is_verified, :venue_admin_id, images: [])
+      params.require(:venue).permit(:name, :address, :latitude, :float, :longitude, :city_id, :phone_number, :uploader_id, :is_claimed, :venue_admin_id, images: [])
     end
 end

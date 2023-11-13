@@ -1,0 +1,5 @@
+div class="w-fit flex items-center text-sm text-gray-400 italic"
+  span.mr-1 Added by
+  span.underline.underline-offset-2 = venue.uploader.familiar_name
+  - if venue.uploader.avatar.attached?
+    = image_tag @venue.uploader.avatar, class: "ml-2 bg-white object-cover w-10 h10 rounded-full shadow cursor-pointer hover:scale-150"
