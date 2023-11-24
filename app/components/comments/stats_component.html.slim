@@ -1,0 +1,9 @@
+div.votes-and-comments.mt-2.flex.items-center.justify-between
+  div.flex.items-center.gap-3
+    i class="fa-solid fa-caret-up text-lg mt-0.5 text-green-500"
+    p.text-xs.text-green-500 = comment.votes
+    i class="fa-solid fa-caret-down text-lg mb-0.5 text-brand-red"
+  = link_to replies_comment_path(comment), data: { turbo_frame: dom_id(comment, :replies) } do
+    div.flex.items-center.gap-3
+      i class="fa-regular fa-message"
+      p.text-xs = comment.replies_count

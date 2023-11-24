@@ -1,6 +1,12 @@
-= form_with url: root_path, method: :get, data: { turbo: false } do |f|
-  = f.hidden_field :explore, value: true
-  div class="flex items-center gap-3 text-sm"
-    div class="relative off-border #{width} h-[2rem] py-1.5 px-3"
-      = f.text_field 'search', class: "px-4 bg-transparent w-full h-full rounded-lg absolute -left-1 -top-1", placeholder: "Search for pubs/restaurants/etc by city..."
-    = f.button 'Search', class: 'btn h-fit btn-red'
+div.w-full
+  = form_with url: root_path, method: :get, data: { turbo: false } do |f|
+    = f.hidden_field :explore, value: true
+    div class="flex #{navbar? ? 'w-11/12' : 'flex-col mx-auto w-5/6'} lg:flex-row justify-center items-center gap-3 text-sm"
+      div class="relative off-border #{'!bg-gray-200' if navbar?} #{width} h-[2rem] py-1.5 px-3"
+        = f.text_field 'search', class: "px-4 bg-transparent placeholder:text-center w-full h-full rounded-lg absolute -left-1 -top-1", placeholder: "Search for pubs/restaurants/etc by city..."
+
+      - if navbar?
+        = f.button class: 'btn h-fit btn-red hidden lg:inline' do
+          i class="fa-solid fa-magnifying-glass"
+      - else
+        = f.button 'Search', class: 'btn h-fit btn-red'

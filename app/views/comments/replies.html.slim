@@ -8,3 +8,5 @@
             p.text-xs.text-gray-400.italic.ml-4 = comment.created_at.strftime('%b %d, %Y, %l:%M %p')
           div.mt-2
             p = comment.body
+    = link_to '#', class: "block w-fit mx-auto text-gray-300 cursor-pointer"
+      i class="fa-solid fa-chevron-up"

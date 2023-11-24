@@ -16,7 +16,7 @@ div class="w-full lg:w-3/5 h-fit"
     h3.text-xl.font-cursiv.font-bold.border-b-2.border-dashed.border-black.pb-2 About the Venue
 
     p.mt-4.px-2
-      | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      == venue.about
 
   div id="hours" class="mt-6 w-full"
     h3.text-xl.font-cursiv.font-bold.border-b-2.border-dashed.border-black.pb-2 Opening Hours
@@ -36,4 +36,4 @@ div class="w-full lg:w-3/5 h-fit"
         - venue.external_links.each do |link|
           div.flex.items-center.gap-3.px-2
             i class="#{ExternalLink::LINK_FAS[link.type_before_type_cast]}"
-            = link_to link.url, link.url, target: '_blank'
+            = link_to link.url, link.url, target: '_blank', class: "hover:underline hover:decoration-4 hover:decoration-brand-yellow"

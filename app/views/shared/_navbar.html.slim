@@ -1,6 +1,6 @@
-div class="z-50 fixed top-0 inset-x-0 px-16 py-6 transition-colors duration-300" data-controller="navbar" data-action="#{request.path == '/' ? 'scroll@window->navbar#updateNavbar' : ''}" data-navbar-home-path-value="#{request.path == '/'}"
-  div class="w-full flex items-center justify-between"
-    div class="flex items-center"
+div class="z-50 fixed top-0 inset-x-0 px-4 lg:px-16 py-6 transition-colors duration-300" data-controller="navbar" data-action="#{request.path == '/' ? 'scroll@window->navbar#updateNavbar' : ''}" data-navbar-home-path-value="#{request.path == '/'}"
+  div class="w-full flex items-center justify-between w-full lg:w-auto"
+    div class="flex items-center w-full lg:w-auto"
       - if request.path == "/"
         = link_to '#home', class: "btn btn-red w-12 h-12 mr-4", data: { controller: "scroll-to", "scroll-to-behavior-value": "smooth" }
           = image_tag 'dove-solid.svg', class: 'absolute top-1.5 left-1.5 object-contain w-8 h-8'
@@ -9,11 +9,21 @@ div class="z-50 fixed top-0 inset-x-0 px-16 py-6 transition-colors duration-300"
           = image_tag 'dove-solid.svg', class: 'absolute top-1.5 left-1.5 object-contain w-8 h-8'
 
       = link_to 'Explore!', '#explore-venues', id: "navbar-explore", class: "text-brand-red font-cursiv font-bold", data: { controller: "scroll-to", "scroll-to-behavior-value": "smooth", 'navbar-target': 'exploreLink' }
-      div data-navbar-target="searchbar" class="hidden"
+      div data-navbar-target="searchbar" class="hidden w-full flex-grow"
         = render Shared::SearchbarComponent.new(location: 'navbar')
-    div class="flex items-center gap-4"
-      = link_to '+ Add a venue', new_venue_path, class: 'btn btn-yellow'
-      - if user_signed_in?
+
+    div class="flex items-center gap-4 relative" data-controller="dropdown"
+      = link_to '+ Add a venue', new_venue_path, class: 'btn btn-yellow hidden lg:inline'
+
+      // dropdown
+      = content_tag :button, class: 'btn btn-red', data: { action: "dropdown#toggle click@window->dropdown#hide" } do
+        i class="fa-solid fa-bars-staggered"
+
+      = content_tag :div, class: "hidden off-border p-5 grid grid-cols-1 gap-3 transition transform origin-top-right absolute top-10 right-0 w-48", data: { dropdown_target: "menu", transition_enter_from: "opacity-0 scale-95", transition_enter_to: "opacity-100 scale-100", transition_leave_from: "opacity-100 scale-100", transition_leave_to: "opacity-0 scale-95"}
+        = link_to 'Link 1','#', data: { action: "dropdown#toggle" }
+        = link_to 'Link 2','#', data: { action: "dropdown#toggle" }
+        = link_to 'Link 3','#', data: { action: "dropdown#toggle" }
+      / - if user_signed_in?
         = link_to destroy_user_session_path, data: { turbo_method: :delete }, class: 'btn btn-red'
           i class="fa-solid fa-right-from-bracket text-white"
       / = content_tag :button, 'Login', class: 'btn btn-blue'

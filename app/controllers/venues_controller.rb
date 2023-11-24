@@ -1,5 +1,5 @@
 class VenuesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index, :show]
+  skip_before_action :authenticate_user!, only: [:index, :regions, :show]
   before_action :set_venue, only: %i[ show edit update destroy ]
 
   def index
@@ -16,6 +16,17 @@ class VenuesController < ApplicationController
       # data-turbo="false" on the form to make the anchor works
       redirect_to root_path(anchor: 'explore-venues')
     end
+  end
+
+  def regions
+    @venues = Venue.all
+    # @venues = @venues.where(....) if params[:region].present?
+    @markers = Venue.all.map {|x| {
+      lat: x.latitude,
+      lng: x.longitude,
+      info_window_html: Shared::CardComponent.new(venue: x).to_html,
+      marker_html: render_to_string(partial: "shared/marker", locals: {venue: x})}
+    }
   end
 
   def show

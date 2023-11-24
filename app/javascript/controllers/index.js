@@ -22,8 +22,8 @@ application.register("marker", MarkerController)
 import NavbarController from "./navbar_controller"
 application.register("navbar", NavbarController)
 
-import PagesController from "./pages_controller"
-application.register("pages", PagesController)
-
 import TomSelectController from "./tom_select_controller"
 application.register("tom-select", TomSelectController)
+
+import VenuesController from "./venues_controller"
+application.register("venues", VenuesController)

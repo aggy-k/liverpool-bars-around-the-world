@@ -47,14 +47,26 @@ require 'open-uri'
 # end
 
 
-5.times do
-  u = User.create!(email: Faker::Internet.email, username: Faker::Internet.username, password: '12345678')
-  u.avatar.attach(io: URI.open(Faker::Avatar.image), filename: Devise.friendly_token(8))
-  Comment.create!(body: Faker::Lorem.sentences(number: 2), user: u, venue: Venue.first)
-end
+# 5.times do
+#   u = User.create!(email: Faker::Internet.email, username: Faker::Internet.username, password: '12345678')
+#   u.avatar.attach(io: URI.open(Faker::Avatar.image), filename: Devise.friendly_token(8))
+#   Comment.create!(body: Faker::Lorem.sentences(number: 2), user: u, venue: Venue.first)
+# end
 
+# City.update_all(country_id: nil)
+# Country.destroy_all
 
+# array = CSV.read(Rails.root.join("db", "seeds", "continents_countries.csv"))
+# array = array.map.with_index do |x,i|
+#   next if i.zero?
+#   {continent_name: x.first, name: x.last}
+# end
+# Country.insert_all(array.reject(&:nil?))
 
+# query = <<~SQL
+#   UPDATE cities SET country_id = countries.id
+#   FROM countries WHERE countries.name = cities.country_name
+# SQL
 
-
+# City.connection.execute(query)
 
