@@ -10,7 +10,6 @@ export default class extends Controller {
     console.log('connected to navbar controller')
     // console.log('exploreLink', this.exploreLinkTarget)
     // console.log('searchbar', this.searchbarTarget)
-    console.log('mapView', this.mapViewTarget)
     console.log(123, this.homePathValue)
     if (!this.homePathValue) {
       this.element.classList.add("bg-gray-50")

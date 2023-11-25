@@ -19,6 +19,7 @@ class VenuesController < ApplicationController
   end
 
   def regions
+    @map = params[:map_view].present? ? params[:map_view] == 'true' : false
     @venues = Venue.all
     # @venues = @venues.where(....) if params[:region].present?
     @markers = Venue.all.map {|x| {

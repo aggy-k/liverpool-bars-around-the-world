@@ -7,11 +7,15 @@
         - if index > 0
           span = " | "
         = link_to region, regions_venues_path(region: region), data: { turbo_frame: '_self'}, class: "hover:underline hover:decoration-4 hover:decoration-brand-yellow active:underline active:decoration-4 active:decoration-brand-yellow #{'underline decoration-4 decoration-brand-yellow' if params[:region] == region}"
-  div class="flex gap-4 h-full overflow-hidden"
-    div class="grid grid-cols-1 gap-4 overflow-y-scroll flex-grow pt-2 pb-24 lg:pb-8 px-2 lg:pl-2 lg:pr-4"
+  div class="flex gap-4 overflow-hidden" style="height: calc(100vh - 6rem - 3.75rem);" data-controller="venues" data-action="scroll@window->venues#updatePage"
+    = content_tag :div, class: "grid grid-cols-1 gap-4 h-full overflow-y-scroll flex-grow pt-2 pb-24 lg:pb-8 px-2 lg:pl-2 lg:pr-4", data: { venues_target: 'cardsContainer' }
       - 10.times do
         = render Shared::CardComponent.new(venue: Venue.first)
+      = content_tag :div, class: "hidden lg:hidden inset-x-0 bottom-10", data: { venues_target: 'viewMap' }
+        div class="w-fit mx-auto"
+          = content_tag :div, class: "btn btn-red flex items-center", data: {action: "click->venues#switchToMap"}
+            i class="fa-solid fa-map mr-2"
+            span Map view
 
-
-    div class="w-2/3 pt-2 pb-8 overflow-hidden hidden lg:block"
+    = content_tag :div, class: "w-full h-full lg:w-2/3 pt-2 pb-8 overflow-hidden", data: { venues_target: 'mapContainer' }
       = render 'shared/map', markers: @markers

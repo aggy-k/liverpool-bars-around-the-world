@@ -1,1 +1,7 @@
 div class="w-full h-full overflow-hidden" data-controller="map" data-map-markers-value="#{markers.to_json}" data-map-api-key-value="#{Rails.application.credentials.dig(:mapbox, :token)}"
+= content_tag :div, class: "fixed lg:hidden inset-x-0 bottom-10", data: { venues_target: 'viewList' }
+  div class="w-fit mx-auto"
+    = content_tag :div, class: "btn btn-red flex items-center", data: {ontroller: 'venues', action: "click->venues#switchToList"}
+      i class="fa-solid fa-list mr-2"
+      span List view
+
