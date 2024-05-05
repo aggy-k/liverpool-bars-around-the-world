@@ -1,12 +1,11 @@
 = turbo_frame_tag dom_id(@comment, :replies) do
-  - if @comment.replies.present?
-    div class="my-4 ml-2 pl-3 border-l border-gray-300"
+  div class="my-4 ml-2 pl-3 border-l border-gray-300"
+    - if user_signed_in?
+      = turbo_frame_tag dom_id(@comment, :reply), src: reply_comment_path(@comment)
+    = turbo_frame_tag dom_id(@comment, :replies_body) do
       - @comment.replies.order(created_at: :desc).each do |comment|
         div class="flex flex-col py-3"
-          div.flex.items-center
-            p.text-sm.font-semibold.text-gray-500 = "#{comment.user.username}"
-            p.text-xs.text-gray-400.italic.ml-4 = comment.created_at.strftime('%b %d, %Y, %l:%M %p')
-          div.mt-2
-            p = comment.body
+          = render 'body', comment: comment
+
     = link_to '#', class: "block w-fit mx-auto text-gray-300 cursor-pointer"
       i class="fa-solid fa-chevron-up"

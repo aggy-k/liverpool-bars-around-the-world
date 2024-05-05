@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   end
 
   resources :comments, only: [] do
+    get :reply, on: :member
     get :replies, on: :member
+    get :upvote, on: :member
+    get :downvote, on: :member
   end
 end

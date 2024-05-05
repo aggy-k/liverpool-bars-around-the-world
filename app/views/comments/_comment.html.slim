@@ -1,18 +1,19 @@
 = tag.div id: dom_id(comment), class: "flex flex-col py-3 border-b border-black border-dashed" do
-  div.flex.items-center
-    p.text-sm.font-semibold.text-gray-500 = "#{comment.user.username}"
-    p.text-xs.text-gray-400.italic.ml-4 = comment.created_at.strftime('%b %d, %Y, %l:%M %p')
-  div.mt-2
-    p = comment.body
-  / = render Comments::StatsComponent.new(comment: comment)
+  = render 'comments/body', comment: comment
   div.votes-and-comments.mt-2.flex.items-center.justify-between
     div.flex.items-center.gap-3
-      i class="fa-solid fa-caret-up text-lg mt-0.5 text-green-500"
-      p.text-xs.text-green-500 = comment.votes
-      i class="fa-solid fa-caret-down text-lg mb-0.5 text-brand-red"
-    = link_to replies_comment_path(comment), data: { turbo_frame: dom_id(comment, :replies) } do
-      div.flex.items-center.gap-3
-        i class="fa-regular fa-message"
-        p.text-xs = comment.replies_count
+      / = link_to user_signed_in? ? upvote_comment_path(comment) : new_user_session_path, data: {turbo_frame: user_signed_in? ? nil : "_top"}
+      /   i class="fa-solid fa-caret-up text-lg mt-0.5 text-green-500"
+      / p.text-xs.text-green-500
+      /   = turbo_frame_tag dom_id(comment, :votes)
+      /     = comment.votes
+      / i class="fa-solid fa-caret-down text-lg mb-0.5 text-brand-red"
+    div.flex.items-center.gap-3
+      = link_to replies_comment_path(comment), data: { turbo_frame: dom_id(comment, :replies) } do
+        div.flex.items-center.gap-3
+          i class="fa-regular fa-message"
+          p.text-xs
+            = turbo_frame_tag dom_id(comment, :replies_count)
+             = comment.replies_count
 
   = turbo_frame_tag dom_id(comment, :replies)

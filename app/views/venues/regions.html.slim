@@ -1,21 +1,28 @@
 = turbo_frame_tag :region do
   / p = "What region? #{params[:region]}"
-  div class="py-4 flex"
-    p.font-cursiv.font-semibold.text-lg.mr-2 REGIONS
-    div.text-sm.flex.flex-wrap.items-center.gap-1
-      - Country.distinct.pluck(:continent_name).each.with_index do |region, index|
-        - if index > 0
-          span = " | "
-        = link_to region, regions_venues_path(region: region), data: { turbo_frame: '_self'}, class: "hover:underline hover:decoration-4 hover:decoration-brand-yellow active:underline active:decoration-4 active:decoration-brand-yellow #{'underline decoration-4 decoration-brand-yellow' if params[:region] == region}"
+  div class="py-4 flex items-center gap-2 w-full"
+    p.font-cursiv.font-semibold.text-lg.mr-2.mb-1 REGIONS
+    div.grow.overflow-x-scroll.p-1.scrollbar-none
+      div.text-sm.flex.items-center.gap-1
+        - Country.distinct.pluck(:continent_name).unshift('All').each.with_index do |region, index|
+          = link_to region, regions_venues_path(region: region), data: { turbo_frame: '_self'}, class: "whitespace-nowrap btn #{params[:region] == region || (params[:region].blank? && region == 'All') ? 'btn-yellow' : 'btn-invert'}"
   div class="flex gap-4 overflow-hidden" style="height: calc(100vh - 6rem - 3.75rem);" data-controller="venues" data-action="scroll@window->venues#updatePage"
-    = content_tag :div, class: "grid grid-cols-1 gap-4 h-full overflow-y-scroll flex-grow pt-2 pb-24 lg:pb-8 px-2 lg:pl-2 lg:pr-4", data: { venues_target: 'cardsContainer' }
-      - 10.times do
-        = render Shared::CardComponent.new(venue: Venue.first)
-      = content_tag :div, class: "hidden lg:hidden inset-x-0 bottom-10", data: { venues_target: 'viewMap' }
-        div class="w-fit mx-auto"
-          = content_tag :div, class: "btn btn-red flex items-center", data: {action: "click->venues#switchToMap"}
-            i class="fa-solid fa-map mr-2"
-            span Map view
+    - if @venues.present?
+      div.h-full.overflow-y-scroll
+        = content_tag :div, class: "grid grid-cols-1 items-start gap-4 h-fit overflow-y-scroll flex-grow pt-2 pb-24 lg:pb-8 px-2 lg:pl-2 lg:pr-4", data: { venues_target: 'cardsContainer' }
+          - @venues.each do |venue|
+            = render Shared::CardComponent.new(venue: venue)
+          = content_tag :div, class: "hidden lg:hidden inset-x-0 bottom-10", data: { venues_target: 'viewMap' }
+            div class="w-fit mx-auto"
+              = content_tag :div, class: "btn btn-red flex items-center", data: {action: "click->venues#switchToMap"}
+                i class="fa-solid fa-map mr-2"
+                span Map view
+    - else
+      div.mx-auto
+        div
+          p.mb-4 There's nothing yet.
+          = link_to '+ Add a venue', new_venue_path, data: { turbo_frame: '_top' }, class: "btn btn-yellow"
 
-    = content_tag :div, class: "w-full h-full lg:w-2/3 pt-2 pb-8 overflow-hidden", data: { venues_target: 'mapContainer' }
-      = render 'shared/map', markers: @markers
+    - if @venues.present?
+      = content_tag :div, class: "w-full h-full lg:w-[60%] shrink-0 pt-2 pb-8 overflow-hidden", data: { venues_target: 'mapContainer' }
+        = render 'shared/map', markers: @markers

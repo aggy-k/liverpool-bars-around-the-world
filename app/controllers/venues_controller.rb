@@ -1,4 +1,5 @@
 class VenuesController < ApplicationController
+  layout -> { turbo_frame_request? ? false : 'application' }
   skip_before_action :authenticate_user!, only: [:index, :regions, :show]
   before_action :set_venue, only: %i[ show edit update destroy ]
 
@@ -19,10 +20,16 @@ class VenuesController < ApplicationController
   end
 
   def regions
+    @page = params[:page] || 1
     @map = params[:map_view].present? ? params[:map_view] == 'true' : false
     @venues = Venue.all
-    # @venues = @venues.where(....) if params[:region].present?
-    @markers = Venue.all.map {|x| {
+
+    if params[:region].present? && params[:region] != 'All'
+      @venues = @venues.joins(:city => :country).where(countries: { continent_name: params[:region] })
+    end
+
+    @venues = @venues.page(@page)
+    @markers = @venues.map {|x| {
       lat: x.latitude,
       lng: x.longitude,
       info_window_html: Shared::CardComponent.new(venue: x).to_html,

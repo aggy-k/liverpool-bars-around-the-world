@@ -1,9 +1,23 @@
-<% if @comment.errors.present? %>
-   <%= turbo_stream.replace dom_id(@comment), partial: 'form', locals: { venue: @venue, comment: @comment } %>
-<% else %>
-   <%= turbo_stream.replace :new_venue_comment do %>
-      <%= turbo_frame_tag :new_venue_comment, src: new_venue_comment_path(@venue) %>
-   <% end %>
+<% if @comment.parent.blank? %>
+  <% if @comment.errors.present? %>
+     <%= turbo_stream.replace dom_id(@comment), partial: 'form', locals: { venue: @venue, comment: @comment, parent: @comment.parent } %>
+  <% else %>
+     <%= turbo_stream.replace :new_venue_comment do %>
+        <%= turbo_frame_tag :new_venue_comment, src: new_venue_comment_path(@venue) %>
+     <% end %>
 
-   <%= turbo_stream.prepend 'comments', partial: 'comment', locals: { comment: @comment } %>
+     <%= turbo_stream.prepend 'comments', partial: 'comment', locals: { comment: @comment } %>
+  <% end %>
+<% else %>
+  <% if @comment.errors.present? %>
+     <%= turbo_stream.replace dom_id(@comment.parent, :reply), partial: 'form', locals: { venue: @venue, comment: @comment, parent: @comment.parent } %>
+  <% else %>
+     <%= turbo_stream.replace dom_id(@comment.parent, :reply) do %>
+        <%= turbo_frame_tag dom_id(@comment.parent, :reply), src: reply_comment_path(@comment.parent) %>
+     <% end %>
+
+     <%= turbo_stream.prepend dom_id(@comment.parent, :replies_body), partial: 'comments/body', locals: { comment: @comment } %>
+
+     <%= turbo_stream.replace dom_id(@comment.parent, :replies_count), @comment.parent.replies_count %>
+  <% end %>
 <% end %>

@@ -1,8 +1,9 @@
 = turbo_frame_tag dom_id(comment) do
   = form_with model: [venue, comment] do |f|
     div.flex.flex-col
-      = f.label :comment, 'Leave comment'
+      = f.label :comment, "Leave #{comment.parent.present? ? 'reply' : 'comment'}"
       = f.text_area :body, class: "rounded-lg border border-dashed min-h-24"
       = render 'shared/error', field: :body, object: comment
+      = hidden_field :comment, :parent_id
     div.mt-4.w-fit.ml-auto
       = f.button 'Send', class: "btn btn-blue"

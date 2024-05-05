@@ -16,6 +16,10 @@
   </head>
 
   <body>
+    <% flash.each do |type, msg| %>
+      <%= render Shared::FlashComponent.new(type: type, text: msg) %>
+    <% end %>
+
     <%= render 'shared/navbar'  %>
     <!-- <div class="pt-28 px-16 pb-4 bg-gray-100"> -->
     <div class="text-gray-700 bg-gray-50">

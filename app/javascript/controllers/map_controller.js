@@ -14,7 +14,7 @@ export default class extends Controller {
     // console.log('markers', this.markersValue)
     // console.log('el', this.element)
     const parent = this.element.parentNode;
-    // if (!parent.classList.contains("hidden")) this.createMap()
+    if (!parent.classList.contains("hidden")) this.createMap()
     this.onClassChange(parent, (observer) => console.log('Trigger onClassChange callback'))
   }
 

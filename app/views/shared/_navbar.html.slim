@@ -19,12 +19,33 @@ div class="z-50 fixed top-0 inset-x-0 px-4 lg:px-16 py-6 transition-colors durat
       = content_tag :button, class: 'btn btn-red', data: { action: "dropdown#toggle click@window->dropdown#hide" } do
         i class="fa-solid fa-bars-staggered"
 
-      = content_tag :div, class: "hidden off-border p-5 grid grid-cols-1 gap-3 transition transform origin-top-right absolute top-10 right-0 w-48", data: { dropdown_target: "menu", transition_enter_from: "opacity-0 scale-95", transition_enter_to: "opacity-100 scale-100", transition_leave_from: "opacity-100 scale-100", transition_leave_to: "opacity-0 scale-95"}
-        = link_to 'Link 1','#', data: { action: "dropdown#toggle" }
-        = link_to 'Link 2','#', data: { action: "dropdown#toggle" }
-        = link_to 'Link 3','#', data: { action: "dropdown#toggle" }
-      / - if user_signed_in?
-        = link_to destroy_user_session_path, data: { turbo_method: :delete }, class: 'btn btn-red'
-          i class="fa-solid fa-right-from-bracket text-white"
-      / = content_tag :button, 'Login', class: 'btn btn-blue'
-      / = content_tag :button, 'Sign up', class: 'btn btn-red'
+      = content_tag :div, class: "hidden off-border-menu p-5 transition transform origin-top-right absolute top-10 right-0 w-48", data: { dropdown_target: "menu", transition_enter_from: "opacity-0 scale-95", transition_enter_to: "opacity-100 scale-100", transition_leave_from: "opacity-100 scale-100", transition_leave_to: "opacity-0 scale-95"}
+        div class="grid grid-cols-1 gap-3 border-b-2 border-dashed border-black pb-3"
+          - if user_signed_in?
+            = link_to destroy_user_session_path, data: { turbo_method: :delete }, class: 'flex items-center gap-2 link-hover-yellow'
+              i class="fa-solid fa-right-from-bracket w-5"
+              span Sign out
+          - else
+            = link_to new_user_session_path, class: 'flex items-center gap-2 link-hover-yellow'
+              i class="fa-solid fa-right-to-bracket w-5"
+              span Login
+            = link_to new_user_registration_path, class: 'flex items-center gap-2 link-hover-yellow'
+              i class="fa-regular fa-address-card w-5"
+              span Signup
+          = link_to new_venue_path, class: "flex items-center gap-2 lg:hidden link-hover-yellow" do
+            i class="fa-regular fa-square-plus w-5"
+            span Add a venue
+
+        div class="grid grid-cols-1 gap-3 mt-3"
+          = link_to '#', class: "flex items-center gap-2 link-hover-yellow" do
+            i class="fa-solid fa-quote-left w-5"
+            span About
+          = link_to '#', class: "flex items-center gap-2 link-hover-yellow" do
+            i class="fa-regular fa-envelope w-5"
+            span Contact us
+          = link_to '#', class: "flex items-center gap-2 link-hover-yellow" do
+            i class="fa-regular fa-file-lines w-5"
+            span Terms
+          = link_to '#', class: "flex items-center gap-2 link-hover-yellow" do
+            i class="fa-solid fa-user-shield w-5"
+            span Privacy Policy

@@ -1,0 +1,5 @@
+div.flex.items-center
+  p.text-sm.font-semibold.text-gray-500 = "#{comment.user.username}"
+  p.text-xs.text-gray-400.italic.ml-4 = comment.created_at.strftime('%b %d, %Y, %l:%M %p')
+div.mt-2
+  p = comment.body

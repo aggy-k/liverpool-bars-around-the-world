@@ -1,4 +1,4 @@
-div class="min-h-screen pt-32 pb-16 px-4 md:px-16 lg:px-32"
+div class="min-h-screen pt-32 pb-16 px-4 md:px-16 lg:px-40"
   // desktop images
   div class="hidden lg:flex lg:items-center lg:gap-4"
     div class="w-3/5"
@@ -16,11 +16,11 @@ div class="min-h-screen pt-32 pb-16 px-4 md:px-16 lg:px-32"
   div class="p-4 w-full flex flex-col-reverse lg:flex-row lg:justify-between lg:items-center"
     div
       h1.font-cursiv.font-bold.text-3xl = @venue.name
-      p.text-xs.italic.text-gray-400 = "#{@venue.city.name}, #{@venue.city.country}"
+      p.text-xs.italic.text-gray-400 = "#{@venue.city.name}, #{@venue.city.country.name}"
     div class="hidden lg:inline"
       = render 'added_by', venue: @venue
 
-  div class="mt-4 flex flex-col lg:flex-row gap-12 px-4"
+  div class="mt-4 flex flex-col lg:flex-row gap-20 px-4"
     = render 'show_left', venue: @venue
     = render 'show_right', venue: @venue
 

@@ -1,0 +1,15 @@
+div class="z-999 w-[36rem] fixed top-12 right-10 flex rounded-lg bg-white text-sm text-dark-text shadow transition"
+div [data-controller="notification"
+  data-notification-delay-value="2000"
+  class="transition transform duration-1000 hidden"
+  data-transition-enter-from="opacity-0 translate-x-6"
+  data-transition-enter-to="opacity-100 translate-x-0"
+  data-transition-leave-from="opacity-100 translate-x-0"
+  data-transition-leave-to="opacity-0 translate-x-6"
+  class="z-999 w-[36rem] fixed top-12 right-10 flex rounded-lg bg-white text-sm text-dark-text shadow transition"]
+  div class="flex gap-5 px-4 py-4 w-full text-base"
+    div
+      i class="text-2xl #{fa_color} #{fa_class}"
+    div.grow = @text
+    button data-action="notification#hide" class="h-fit"
+      i class="fa-solid fa-xmark text-sm"

@@ -72,6 +72,15 @@
     @apply border-2 border-black rounded-lg absolute -top-1 -left-1 w-full h-full;
   }
 
+  .off-border-menu {
+    @apply bg-white rounded-lg;
+  }
+
+  .off-border-menu:after {
+    content: '';
+    @apply border-2 border-black rounded-lg absolute -top-1 -left-1 w-full h-full z-[-1];
+  }
+
   .brand-card {
     @apply bg-gray-200 rounded-lg pt-[0.5rem] pb-[1rem] pl-[0.5rem] pr-[1rem] relative;
   }
@@ -83,6 +92,10 @@
   .brand-card:after {
     content: '';
     @apply border-2 border-black rounded-lg absolute -top-1 -left-1 w-full h-full;
+  }
+
+  .link-hover-yellow {
+    @apply hover:underline hover:decoration-4 hover:decoration-brand-yellow active:underline active:decoration-4 active:decoration-brand-yellow;
   }
 
   .mapboxgl-popup-content {
@@ -138,6 +151,12 @@
 
   .choices {
     @apply !overflow-visible;
+  }
+
+  .scrollbar-none {
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 }
 /*

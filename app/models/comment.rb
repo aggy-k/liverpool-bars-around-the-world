@@ -10,4 +10,16 @@ class Comment < ApplicationRecord
   scope :parents, -> { where(parent_id: nil) }
   scope :latest, -> { parents.order(:created_at => :desc) }
   scope :top, -> { parents.order(:votes => :desc) }
+
+  def upvote
+    self.votes += 1
+  end
+
+  def upvote!
+    update!(votes: votes + 1)
+  end
+
+  def downvote!
+    update!(votes: votes - 1)
+  end
 end
