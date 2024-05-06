@@ -6,14 +6,14 @@ export default class extends Controller {
   connect() {
     // console.log(11, this.viewMapTarget)
     // console.log(22, this.cardsContainerTarget)
-    console.log(33, this.mapContainerTarget)
-    console.log(window.innerWidth)
+    // console.log(33, this.mapContainerTarget)
+    // console.log(window.innerWidth)
     this.toggleShowMapContainer()
     window.addEventListener('resize', () => this.toggleShowMapContainer())
   }
 
   toggleShowMapContainer() {
-    console.log('in toggleShowMapContainer')
+    // console.log('in toggleShowMapContainer')
     if (window.innerWidth < 1024) {
       this.mapContainerTarget.classList.add("hidden")
     } else {
@@ -36,7 +36,7 @@ export default class extends Controller {
   }
 
   switchToMap() {
-    console.log('hello')
+    // console.log('hello')
     this.viewMapTarget?.classList?.add("hidden")
     this.viewListTarget?.classList?.remove("hidden")
     this.cardsContainerTarget?.classList?.add("hidden")
@@ -44,7 +44,7 @@ export default class extends Controller {
   }
 
   switchToList() {
-    console.log('hello')
+    // console.log('hello')
     this.viewMapTarget?.classList?.remove("hidden")
     this.viewListTarget?.classList?.add("hidden")
     this.cardsContainerTarget?.classList?.remove("hidden")

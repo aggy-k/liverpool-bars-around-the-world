@@ -6,6 +6,7 @@ div id="home"
       = render Shared::SearchbarComponent.new(location: 'banner')
 
   section class="w-full mt-8 pt-16 lg:pt-16 px-4 lg:px-32 overflow-hidden sticky top-0" id="explore-venues"
-    = turbo_frame_tag :region, src: regions_venues_path(region: params[:region], map_view: false)
+    = turbo_frame_tag :region, src: regions_venues_path(region: params[:region]), data: { turbo_action: "persist_params" }
+    / = turbo_frame_tag :region, src: regions_venues_path(region: params[:region], map_view: false)
 
 

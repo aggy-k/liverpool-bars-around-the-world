@@ -13,7 +13,7 @@ export default class extends Controller {
   }
 
   keyup(e) {
-    console.log('keyup event', e.detail)
+    // console.log('keyup event', e.detail)
     // on search, start searching cities table and set option
   }
 }

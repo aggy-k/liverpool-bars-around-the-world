@@ -9,7 +9,7 @@ export default class extends Controller {
   }
 
   connect() {
-    console.log('connected to map-controller')
+    // console.log('connected to map-controller')
     // console.log('apikey', this.apiKeyValue)
     // console.log('markers', this.markersValue)
     // console.log('el', this.element)
@@ -26,7 +26,7 @@ export default class extends Controller {
       style: "mapbox://styles/mapbox/streets-v10"
     })
     this.map.on('render', () => this.map.resize())
-    console.log('map created')
+    // console.log('map created')
 
     this.addMarkersToMap()
     this.fitMapToMarkers()
@@ -34,13 +34,13 @@ export default class extends Controller {
 
   onClassChange(node, callback) {
     let lastClassString = node.classList.toString();
-    console.log('lastClassString', lastClassString)
+    // console.log('lastClassString', lastClassString)
 
     const mutationObserver = new MutationObserver((mutationList) => {
       for (const item of mutationList) {
         if (item.attributeName === "class") {
           const classString = node.classList.toString();
-          console.log('classString', classString)
+          // console.log('classString', classString)
           if (classString !== lastClassString) {
             if (node.classList.contains('hidden')) {
               this.map = null

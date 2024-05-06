@@ -1,0 +1,3 @@
+<%= turbo_stream.replace 'region' do %>
+  <%= turbo_frame_tag :region, src: regions_venues_path(search: params[:search]), data: {turbo_action: 'persist_params' } %>
+<% end %>

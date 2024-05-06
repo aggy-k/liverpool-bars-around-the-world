@@ -2,7 +2,7 @@
   = form_with model: [venue, comment] do |f|
     div.flex.flex-col
       = f.label :comment, "Leave #{comment.parent.present? ? 'reply' : 'comment'}"
-      = f.text_area :body, class: "rounded-lg border border-dashed min-h-24"
+      = f.text_area :body, class: "rounded-lg border border-dashed min-h-16", data: { controller: 'textarea-autogrow' }
       = render 'shared/error', field: :body, object: comment
       = hidden_field :comment, :parent_id
     div.mt-4.w-fit.ml-auto

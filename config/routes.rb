@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   resources :venues, param: :slug, only: [ :show, :new, :create, :edit, :update, :destroy ] do
     get :regions, on: :collection
+    get :search, on: :collection
     resources :comments, only: [:create, :new]
   end
 

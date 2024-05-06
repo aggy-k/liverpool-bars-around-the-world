@@ -363,6 +363,11 @@
   dependencies:
     stimulus-use "^0.52.2"
 
+"@stimulus-components/scroll-to@^5.0.1":
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/@stimulus-components/scroll-to/-/scroll-to-5.0.1.tgz#5697578a0be4ee374880db62c2c68fcd49a6ae4a"
+  integrity sha512-teJlu+wQAw3Bl5vI2TJLzW0OxH8W05StYPlWZFUDjudJzhUZwuF27dfu+KH/PwEELWyRyiwC+msXlXXWSTeHmQ==
+
 "@szmarczak/http-timer@^4.0.5":
   version "4.0.6"
   resolved "https://registry.yarnpkg.com/@szmarczak/http-timer/-/http-timer-4.0.6.tgz#b4a914bb62e7c272d4e5989fe4440f812ab1d807"
@@ -1576,10 +1581,10 @@ stimulus-dropdown@^2.1.0:
   dependencies:
     stimulus-use "^0.51.1"
 
-stimulus-scroll-to@^4.1.0:
+stimulus-textarea-autogrow@^4.1.0:
   version "4.1.0"
-  resolved "https://registry.yarnpkg.com/stimulus-scroll-to/-/stimulus-scroll-to-4.1.0.tgz#22b24d768d673f029ab0f68100556e113075fa95"
-  integrity sha512-bKltfECyU8y/ck8yXy77hlK/vv85igW7LPtZpgkUBFuAGz+Ou7EnMPpKrSJiYoK+TXS2COFilb/PGND/xISxJA==
+  resolved "https://registry.yarnpkg.com/stimulus-textarea-autogrow/-/stimulus-textarea-autogrow-4.1.0.tgz#faa2f7952062c4508b1566478dc203af7f24f632"
+  integrity sha512-hYz+xN3VZiO+eLl+zok4yvhH+mW5WkvOJEExyVP3J97dWQzc/qPDFdAM1EDJvfUIuRzJVq/WJynqqQwiied5iw==
 
 stimulus-use@^0.51.1:
   version "0.51.3"

@@ -13,7 +13,7 @@ export default class extends Controller {
   connect() {
     // const addressFieldWrapper = document.getElementById('venue_address_wrapper')
     // const addressField = document.getElementById('venue_address')
-    console.log('targets?', this.targets)
+    // console.log('targets?', this.targets)
     mapboxgl.accessToken = this.apiKeyValue
 
     this.map = new mapboxgl.Map({
@@ -36,12 +36,12 @@ export default class extends Controller {
   }
 
   #addAddressField(event) {
-    console.log(event)
+    // console.log(event)
     const { center, place_name } = event.result;
     this.lngFieldTarget.value = center[0];
     this.latFieldTarget.value = center[1];
-    console.log({ place_name });
-    console.log('addressFieldTarget', this.addressFieldTarget);
+    // console.log({ place_name });
+    // console.log('addressFieldTarget', this.addressFieldTarget);
     this.addressFieldTarget.value = place_name;
   }
 

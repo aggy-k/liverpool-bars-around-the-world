@@ -5,7 +5,7 @@
     div.grow.overflow-x-scroll.p-1.scrollbar-none
       div.text-sm.flex.items-center.gap-1
         - Country.distinct.pluck(:continent_name).unshift('All').each.with_index do |region, index|
-          = link_to region, regions_venues_path(region: region), data: { turbo_frame: '_self'}, class: "whitespace-nowrap btn #{params[:region] == region || (params[:region].blank? && region == 'All') ? 'btn-yellow' : 'btn-invert'}"
+          = link_to region, regions_venues_path(region: region), data: { turbo_frame: '_self', turbo_action: 'persist_params' }, class: "whitespace-nowrap btn #{@region == region || (@region.blank? && region == 'All') ? 'btn-yellow' : 'btn-invert'}"
   div class="flex gap-4 overflow-hidden" style="height: calc(100vh - 6rem - 3.75rem);" data-controller="venues" data-action="scroll@window->venues#updatePage"
     - if @venues.present?
       div.h-full.overflow-y-scroll

@@ -11,12 +11,14 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
     @comment.venue = @venue
     @comment.user = current_user
-    respond_to do |format|
-      if @comment.save
-        format.turbo_stream
-      else
+
+    if @comment.save
+      respond_to do |format|
+        format.html { redirect_to venue_path(@venue) }
         format.turbo_stream
       end
+    else
+      render :new, status: 422
     end
   end
 
